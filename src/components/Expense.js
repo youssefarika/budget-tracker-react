@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { createContext, useState } from "react";
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { Col, Row } from "react-bootstrap";
 import ViewExpens from "./ViewExpens";
 import ValidationExpense from "./ValidationExpense";
+import { useSelector } from "react-redux";
+import DataContext from "./DataContext";
 
 
 function Expense(props) {
     const [isOpen, setIsOpen] = useState(false);
     const now = 80
+    const dataFromes = useSelector(state => state.data.value);
     return(
-        <div>
+        <DataContext.Provider value={props.title}>
             <div className="block rounded-lg shadow-lg bg-white text-center px-3">
                 <div className="py-3">
                     <div className="user flex items-center justify-between">
@@ -25,7 +28,7 @@ function Expense(props) {
                     </div>
                 </div>
             </div>
-        </div>
+        </DataContext.Provider>
     )
 }
 
