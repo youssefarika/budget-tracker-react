@@ -15,9 +15,10 @@ function ValidationExpense(props) {
         const value = e.target.value;
         setFormData({...formData, [key]: value})
     }
-    const onOptionChangeHandler = (event) => { 
-        console.log("User Selected Value - ", event.target.value) 
-    } 
+
+    const onOptionChangeHandler = (e) => { 
+        setFormData({...formData, user: e.target.value})
+    }
     const dataFromes = useSelector(state => state.data.value);
     return (
         <>
@@ -39,7 +40,7 @@ function ValidationExpense(props) {
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Budget</Form.Label>
-                        <Form.Select aria-label="Default select example" onChange={onOptionChangeHandler}>
+                        <Form.Select aria-label="Default select example" onChange={(e) => onOptionChangeHandler(e)}>
                             <option value= "Uncategorized">Uncategorized</option>
                             {dataFromes.map(from => (
                                 <option value={from.text}  key={from.text}>{from.text}</option>
