@@ -17,10 +17,10 @@ function ValidationBudget(props) {
         setFormData({...formData, [key]: value})
     }
     return (
-        <>
-            <Button variant= {props.outline} onClick={handleShow} className= "mx-1">
+        <div>
+            <button className= {props.outline} onClick={handleShow}>
             {props.text}
-            </Button>
+            </button>
             <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>New Budget</Modal.Title>
@@ -41,7 +41,7 @@ function ValidationBudget(props) {
                         }}>Add</Button>
                 </Form>
             </Modal>
-        </>
+        </div>
     )
 }
 

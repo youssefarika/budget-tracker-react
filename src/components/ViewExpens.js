@@ -15,11 +15,11 @@ function ViewExpens(props)  {
         <DataContext.Consumer>
             {(title) => (
                 <div>
-                    <Button variant={props.outline} onClick={() => {
+                    <button className= {props.outline} onClick={() => {
                         handleShow()
-                    }} className="mx-1">
+                    }}>
                         {props.text}
-                    </Button>
+                    </button>
                     <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton>
                             <div className='title flex'>

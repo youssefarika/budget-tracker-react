@@ -15,16 +15,15 @@ function ValidationExpense(props) {
         const value = e.target.value;
         setFormData({...formData, [key]: value})
     }
-
     const onOptionChangeHandler = (e) => { 
         setFormData({...formData, user: e.target.value})
     }
     const dataFromes = useSelector(state => state.data.value);
     return (
         <>
-            <Button variant= {props.outline} onClick={handleShow} className= "mx-1">
+            <button className= {props.outline} onClick={handleShow}>
             {props.text}
-            </Button>
+            </button>
             <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                     <Modal.Title>New Expense</Modal.Title>
