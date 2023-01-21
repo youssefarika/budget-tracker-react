@@ -18,7 +18,7 @@ function ValidationExpense(props) {
     const onOptionChangeHandler = (e) => { 
         setFormData({...formData, user: e.target.value})
     }
-    const dataFromes = useSelector(state => state.data.value);
+    const dataFromes = useSelector(state => state.data);
     return (
         <>
             <button className= {props.outline} onClick={handleShow}>

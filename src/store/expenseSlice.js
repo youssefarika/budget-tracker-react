@@ -1,16 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
-    value: [],
-  }
 
   export const expenseSlice = createSlice({
     name: "expense",
-    initialState,
+    initialState: [],
     reducers: {
         addexpense: (state, action) => {
-              state.value.push(action.payload)    
-            }
+          state.push(action.payload)    
+        }
     }
   })
 

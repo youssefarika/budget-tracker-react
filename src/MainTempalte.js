@@ -7,8 +7,8 @@ import shortid from 'shortid'
 
 
 function MainTemplate() {
-    const expenses = useSelector(state => state.expense.value);
-    const dataFrom = useSelector(state => state.data.value);
+    const expenses = useSelector(state => state.expense);
+    const dataFrom = useSelector(state => state.data);
     return (
         <Container>
             <div className="mt-4 lg:flex lg:items-center lg:justify-between sm:inline text-center">
@@ -21,7 +21,7 @@ function MainTemplate() {
                    <div className='grid mt-4 xl:grid-cols-3 2xl:grid-cols-4 lg:grid-cols-3 lg:gap-2 gap-4 md:grid-cols-2 md:gap-6'>
                    {expenses.map((expense, index) => (
                         <div key={ shortid.generate() }>
-                            {expense && <Expense title= {dataFrom[index].text} price= {dataFrom[index].amount} index = {index} /> }
+                            {expense && <Expense title= {dataFrom[index].text} price= {dataFrom[index].amount} index= {index} /> }
                         </div>
                     ))}
                     </div>

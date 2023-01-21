@@ -1,20 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
-    value: [],
-  }
 
   export const formeSlice = createSlice({
     name: "expend",
-    initialState,
+    initialState: [],
     reducers: {
         addexpensing: (state, action) => {
-              state.value.push(action.payload)   
-            }
+              state.push(action.payload) 
+            },
+        removeexpensing: (state, action) => {
+              const expenses = state.filter(expense => expense.user !== action.payload.user)
+              return expenses
+        },
+        clear: (state, action) => {
+          return []
+        }
     }
   })
 
-  export const { addexpensing } = formeSlice.actions
+  export const { addexpensing, removeexpensing, clear } = formeSlice.actions
 
   export default formeSlice.reducer
 
