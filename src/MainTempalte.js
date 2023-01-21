@@ -21,7 +21,7 @@ function MainTemplate() {
                    <div className='grid mt-4 xl:grid-cols-3 2xl:grid-cols-4 lg:grid-cols-3 lg:gap-2 gap-4 md:grid-cols-2 md:gap-6'>
                    {expenses.map((expense, index) => (
                         <div key={ shortid.generate() }>
-                            {expense ? <Expense title= {dataFrom[index].text} price= {dataFrom[index].amount} index = {index} /> : null }
+                            {expense && <Expense title= {dataFrom[index].text} price= {dataFrom[index].amount} index = {index} /> }
                         </div>
                     ))}
                     </div>

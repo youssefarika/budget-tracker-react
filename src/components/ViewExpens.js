@@ -9,7 +9,6 @@ function ViewExpens(props)  {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const dataFromes = useSelector(state => state.data.value);
     const expenseForms = useSelector(state => state.expend.value);
     return (
         <DataContext.Consumer>

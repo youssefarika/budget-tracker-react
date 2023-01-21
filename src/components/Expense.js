@@ -2,20 +2,28 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import ViewExpens from "./ViewExpens";
 import ValidationExpense from "./ValidationExpense";
 import DataContext from "./DataContext";
+import { useSelector } from 'react-redux';
 
 
 function Expense(props) {
-    const now = 80
-    return(
+    const expenseForms = useSelector(state => state.expend.value);
+    const totalPrice = expenseForms.reduce((acc, expense) => {
+        acc +=  parseInt(expense.amount)
+        return acc
+      }, 0)
+    const now = totalPrice * 100 / parseInt(props.price)
+    const ProgressColor = now > 60 ? (now > 80 ? "danger" : "warning") : null;
+    const CarDColor = now > 80 ? "block rounded-lg shadow-lg bg-danger bg-opacity-10 text-center px-4" : "block rounded-lg shadow-lg bg-opacity-10 text-center px-4"
+        return (
         <DataContext.Provider value={props.title}>
-            <div className="block rounded-lg shadow-lg bg-white text-center px-4">
+            <div className= {CarDColor}>
                 <div className="py-3">
                     <div className="user flex items-center justify-between">
                         <h5 className="text-gray-900 text-xl font-medium mb-2">{props.title}</h5>
-                        <h5>$0 <span className="text-sm text-slate-500">/</span> <span className='text-sm text-slate-500'>${props.price}</span></h5>
+                        <h5>${totalPrice} <span className="text-sm text-slate-500">/</span> <span className='text-sm text-slate-500'>${props.price}</span></h5>
                     </div>
                         <div className="rounded-pill progressing mt-1">  
-                            <ProgressBar now={now} />;
+                            <ProgressBar now={now} variant= {ProgressColor} />;
                         </div>
                     <div className="buttons flex justify-between">
                         <ValidationExpense outline = {"bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-2 border border-blue-700 rounded"} text ={"Add Expense"}/>
