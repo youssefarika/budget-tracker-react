@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
 import { adddata } from "../store/formdataSlice"
+
 
 function ValidationBudget(props) {
     const [show, setShow] = useState(false);
@@ -37,6 +38,7 @@ function ValidationBudget(props) {
                         <Button className="float-right" variant="primary" onClick={() => {
                             handleClose();
                             dispatch(adddata(formData));
+                            
                         }}>Add</Button>
                 </Form>
             </Modal>

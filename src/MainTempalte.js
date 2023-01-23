@@ -5,7 +5,7 @@ import ValidationBudget from "./components/ValidationBudget"
 import ValidationExpense from "./components/ValidationExpense"
 import shortid from 'shortid'
 import StateContext from "../src/components/StateContext";
-import { useEffect } from "react"
+import Uncategorized from "./components/Uncategorized"
 
 function MainTemplate() {
     const dataFrom = useSelector(state => state.data);
@@ -18,14 +18,18 @@ function MainTemplate() {
                     <ValidationExpense outline= "hover:bg-blue-400 text-blue-700 mx-1 font-semibold hover:text-white py-2 px-2 border border-blue-500 rounded" text= "Add Expenses"/>
                 </div>
             </div>
-                   <div className='grid mt-4 xl:grid-cols-3 2xl:grid-cols-4 lg:grid-cols-3 lg:gap-2 gap-4 md:grid-cols-2 md:gap-6'>
+                <div className='grid mt-4 xl:grid-cols-3 2xl:grid-cols-4 lg:grid-cols-3 lg:gap-2 gap-4 md:grid-cols-2 md:gap-6'>
                     {dataFrom && dataFrom.map((data, index) => (
                             <div key={ shortid.generate() }>
-                                <StateContext.Provider value= {dataFrom[index]}>
-                                {<Expense title= {dataFrom[index] ? dataFrom[index].text : ''} price= {dataFrom[index] ? dataFrom[index].amount : 0} index= {index} /> }                                </StateContext.Provider>
+                                <StateContext.Provider value= {data}>
+                                    {<Expense title= {data.text} price= {data.amount} index= {index} /> }  
+                                </StateContext.Provider>
                             </div>
                     ))}
+                    <div>
+                        {dataFrom.length >= 1 && <Uncategorized /> }
                     </div>
+                </div>
         </Container>
     )
 }

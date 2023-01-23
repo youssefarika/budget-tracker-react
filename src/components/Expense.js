@@ -3,15 +3,13 @@ import ViewExpens from "./ViewExpens";
 import ValidationExpense from "./ValidationExpense";
 import DataContext from "./DataContext";
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
 
 
 function Expense(props) {
     const expenseForms = useSelector(state => state.expend);
     const totalPrice = expenseForms.reduce((acc, expense) => {
-        acc +=  parseInt(expense.amount)
-        return acc
-      }, 0)
+        return expense.user === props.title ? acc + parseInt(expense.amount) : acc;
+    }, 0)
     const now = totalPrice * 100 / parseInt(props.price)
     const ProgressColor = now > 60 ? (now > 80 ? "danger" : "warning") : null;
     const CardColor = now > 80 ? "block rounded-lg shadow-lg bg-danger bg-opacity-10 text-center px-4" : "block rounded-lg shadow-lg bg-opacity-10 text-center px-4"
