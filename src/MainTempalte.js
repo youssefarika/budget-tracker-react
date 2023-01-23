@@ -1,13 +1,13 @@
-import { Button, Col, Container, Row } from "react-bootstrap"
+import { Container } from "react-bootstrap"
 import { useSelector } from "react-redux"
 import Expense from "./components/Expense"
 import ValidationBudget from "./components/ValidationBudget"
 import ValidationExpense from "./components/ValidationExpense"
 import shortid from 'shortid'
-
+import StateContext from "../src/components/StateContext";
+import { useEffect } from "react"
 
 function MainTemplate() {
-    const expenses = useSelector(state => state.expense);
     const dataFrom = useSelector(state => state.data);
     return (
         <Container>
@@ -19,10 +19,11 @@ function MainTemplate() {
                 </div>
             </div>
                    <div className='grid mt-4 xl:grid-cols-3 2xl:grid-cols-4 lg:grid-cols-3 lg:gap-2 gap-4 md:grid-cols-2 md:gap-6'>
-                   {expenses.map((expense, index) => (
-                        <div key={ shortid.generate() }>
-                            {expense && <Expense title= {dataFrom[index].text} price= {dataFrom[index].amount} index= {index} /> }
-                        </div>
+                    {dataFrom && dataFrom.map((data, index) => (
+                            <div key={ shortid.generate() }>
+                                <StateContext.Provider value= {dataFrom[index]}>
+                                {<Expense title= {dataFrom[index] ? dataFrom[index].text : ''} price= {dataFrom[index] ? dataFrom[index].amount : 0} index= {index} /> }                                </StateContext.Provider>
+                            </div>
                     ))}
                     </div>
         </Container>

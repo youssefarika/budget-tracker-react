@@ -8,11 +8,14 @@ import { createSlice } from '@reduxjs/toolkit'
     reducers: {
         adddata: (state, action) => {
           state.push(action.payload)  
+        },
+        clearing: (state, action) => {
+          return state.filter(person => person.text !== action.payload.text)
         }
     }
   })
 
-  export const { adddata } = formdataSlice.actions
+  export const { adddata, clearing } = formdataSlice.actions
 
   export default formdataSlice.reducer
 

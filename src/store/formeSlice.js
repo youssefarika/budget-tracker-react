@@ -12,13 +12,10 @@ import { createSlice } from '@reduxjs/toolkit'
               const expenses = state.filter(expense => expense.user !== action.payload.user)
               return expenses
         },
-        clear: (state, action) => {
-          return []
-        }
     }
   })
 
-  export const { addexpensing, removeexpensing, clear } = formeSlice.actions
+  export const { addexpensing, removeexpensing } = formeSlice.actions
 
   export default formeSlice.reducer
 

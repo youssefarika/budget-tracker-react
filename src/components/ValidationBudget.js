@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
-import { addexpense } from "../store/expenseSlice"
 import { adddata } from "../store/formdataSlice"
 
 function ValidationBudget(props) {
@@ -16,6 +15,7 @@ function ValidationBudget(props) {
         const value = e.target.value;
         setFormData({...formData, [key]: value})
     }
+
     return (
         <div>
             <button className= {props.outline} onClick={handleShow}>
@@ -36,8 +36,7 @@ function ValidationBudget(props) {
                         </Form.Group>
                         <Button className="float-right" variant="primary" onClick={() => {
                             handleClose();
-                            dispatch(addexpense(true));
-                            dispatch(adddata(formData))
+                            dispatch(adddata(formData));
                         }}>Add</Button>
                 </Form>
             </Modal>

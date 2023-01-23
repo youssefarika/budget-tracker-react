@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useDispatch, useSelector } from 'react-redux';
 import DataContext from "./DataContext";
-import { removeexpensing, clear } from "../store/formeSlice"
+import StateContext from "./StateContext";
+
+import { removeexpensing } from "../store/formeSlice"
+import { clearing } from '../store/formdataSlice';
 
 function ViewExpens(props)  {
     const [show, setShow] = useState(false);
@@ -12,9 +15,9 @@ function ViewExpens(props)  {
     const handleShow = () => setShow(true);
     const dispatch = useDispatch()
     const expenseForms = useSelector(state => state.expend);
+    const title = useContext(DataContext)
+    const state = useContext(StateContext)
     return (
-        <DataContext.Consumer>
-            {(title) => (
                 <div>
                     <button className= {props.outline} onClick={() => {
                         handleShow()
@@ -26,7 +29,7 @@ function ViewExpens(props)  {
                             <div className='title flex'>
                                 <Modal.Title>Expenses - {title}</Modal.Title>
                                 <Button variant="outline-danger" className='ml-2' onClick={() => {
-                                    console.log(props.title)
+                                    dispatch(clearing(state))
                                 }}>Delete</Button>
                             </div>
                         </Modal.Header>
@@ -44,8 +47,6 @@ function ViewExpens(props)  {
                         </Form>
                     </Modal>
                 </div>
-            )}
-        </DataContext.Consumer>
     )
 };
 
