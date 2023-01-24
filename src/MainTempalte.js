@@ -6,6 +6,7 @@ import ValidationExpense from "./components/ValidationExpense"
 import shortid from 'shortid'
 import StateContext from "../src/components/StateContext";
 import Uncategorized from "./components/Uncategorized"
+import UncategorizedExpenses from "./components/UncategorizedExpenses"
 
 function MainTemplate() {
     const dataFrom = useSelector(state => state.data);
@@ -26,6 +27,9 @@ function MainTemplate() {
                                 </StateContext.Provider>
                             </div>
                     ))}
+                    <div>
+                        {dataFrom.length >= 1 && <UncategorizedExpenses /> }
+                    </div>
                     <div>
                         {dataFrom.length >= 1 && <Uncategorized /> }
                     </div>
