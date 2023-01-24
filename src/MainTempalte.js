@@ -6,10 +6,11 @@ import ValidationExpense from "./components/ValidationExpense"
 import shortid from 'shortid'
 import StateContext from "../src/components/StateContext";
 import Uncategorized from "./components/Uncategorized"
-import UncategorizedExpenses from "./components/UncategorizedExpenses"
+import UncategorizedBudget from "./components/UncategorizedBudget"
 
 function MainTemplate() {
     const dataFrom = useSelector(state => state.data);
+    const expenseForms = useSelector(state => state.expend);
     return (
         <Container>
             <div className="mt-4 lg:flex lg:items-center lg:justify-between sm:inline text-center">
@@ -28,7 +29,7 @@ function MainTemplate() {
                             </div>
                     ))}
                     <div>
-                        {dataFrom.length >= 1 && <UncategorizedExpenses /> }
+                        {expenseForms.find(exp => exp.user === 'Uncategorized') && <UncategorizedBudget /> }
                     </div>
                     <div>
                         {dataFrom.length >= 1 && <Uncategorized /> }

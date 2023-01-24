@@ -2,15 +2,14 @@ import { useSelector } from "react-redux";
 import ValidationExpense from "./ValidationExpense";
 import ViewExpens from "./ViewExpens";
 
-function UncategorizedExpenses() {
+function UncategorizedBudget() {
         const expenseForms = useSelector(state => state.expend);
         const title = "Uncategorized"
         const totalPrice = expenseForms.reduce((acc, expense) => {
-            if(expense.user === undefined) {
-                return acc += parseInt(expense.amount)
-            } if (expense.user !== title && expense.user !== undefined) {
-                return acc += 0
-            }
+                if(expense.user === title) {
+                    acc += parseInt(expense.amount)
+                }
+                return acc
         }, 0)
             return (
                     <div className= " py-2 block rounded-lg shadow-lg bg-opacity-10 text-center px-4">
@@ -21,11 +20,11 @@ function UncategorizedExpenses() {
                             </div>
                             <div className="buttons flex justify-between">
                                 <ValidationExpense outline = {"bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-2 border border-blue-700 rounded"} text ={"Add Expense"}/>
-                                <ViewExpens outline = {"hover:bg-blue-400 text-blue-700 font-semibold hover:text-white py-2 px-2 border border-blue-500 rounded"} text= {"View Expenses"}/>
+                                <ViewExpens outline = {"hover:bg-blue-400 text-blue-700 font-semibold hover:text-white py-2 px-2 border border-blue-500 rounded"} text= {"View Expenses"} title ={title}/>
                             </div>
                         </div>
                     </div>
             )
 }
 
-export default UncategorizedExpenses
+export default UncategorizedBudget

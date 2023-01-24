@@ -8,7 +8,7 @@ function ValidationExpense(props) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [ formData, setFormData ] = useState([])
+    const [ formData, setFormData ] = useState({ text: '', amount: '', user: 'Uncategorized' });
     const dispatch = useDispatch()
     function handleChange(e) {
         const key = e.target.name;
