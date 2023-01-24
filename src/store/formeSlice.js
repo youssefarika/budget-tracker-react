@@ -1,16 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+let currentState = localStorage.getItem("expense") ? JSON.parse(localStorage.getItem("expense")) : []
+
 
   export const formeSlice = createSlice({
     name: "expend",
-    initialState: [],
+    initialState: currentState,
     reducers: {
         addexpensing: (state, action) => {
-              state.push(action.payload) 
+            state.push(action.payload)
+            localStorage.setItem("expense", JSON.stringify(state))
             },
         removeexpensing: (state, action) => {
-              const expenses = state.filter(expense => expense.user !== action.payload.user)
-              return expenses
+              state = state.filter(expense => expense.user !== action.payload.user)
+              localStorage.setItem("expense", JSON.stringify(state)) 
+              return state
         },
     }
   })

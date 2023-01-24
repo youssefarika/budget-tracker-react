@@ -3,6 +3,7 @@ import ViewExpens from "./ViewExpens";
 import ValidationExpense from "./ValidationExpense";
 import DataContext from "./DataContext";
 import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 
 function Expense(props) {
@@ -13,6 +14,12 @@ function Expense(props) {
     const now = totalPrice * 100 / parseInt(props.price)
     const ProgressColor = now > 60 ? (now > 80 ? "danger" : "warning") : null;
     const CardColor = now > 80 ? "block rounded-lg shadow-lg bg-danger bg-opacity-10 text-center px-4" : "block rounded-lg shadow-lg bg-opacity-10 text-center px-4"
+    // useEffect(() => {
+    //     const posters = JSON.parse(localStorage.getItem('budget'));
+    //     if (posters) {
+    //         setBudget(budget);
+    //     }
+    //   }, [budget]);
         return (
         <DataContext.Provider value= {props.title}>
                 <div className= {CardColor}>
