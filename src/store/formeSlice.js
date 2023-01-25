@@ -12,7 +12,7 @@ let currentState = localStorage.getItem("expense") ? JSON.parse(localStorage.get
             localStorage.setItem("expense", JSON.stringify(state))
             },
         removeexpensing: (state, action) => {
-              state = state.filter(expense => expense.user !== action.payload.user)
+              state = state.filter(expense => expense.text !== action.payload.text)
               localStorage.setItem("expense", JSON.stringify(state)) 
               return state
         },

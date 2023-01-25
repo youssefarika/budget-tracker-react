@@ -28,8 +28,8 @@ function MainTemplate() {
                                 </StateContext.Provider>
                             </div>
                     ))}
-                    <div>
-                        {expenseForms.find(exp => exp.user === 'Uncategorized') && <UncategorizedBudget /> }
+                    <div className={`${expenseForms.find(exp => exp.user === 'Uncategorized') ? "" : "hidden"}`}>
+                        {expenseForms.find(exp => exp.user === 'Uncategorized') && <UncategorizedBudget />}
                     </div>
                     <div>
                         {dataFrom.length >= 1 && <Uncategorized /> }
