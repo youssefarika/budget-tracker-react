@@ -12,7 +12,10 @@ function ValidationExpense(props) {
     const handleClose = () => {
         setShow(false);
     }
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+        setShow(true);
+        setShowalert(expenses);
+    };
     const [ formData, setFormData ] = useState({ text: '', amount: '', user: 'Uncategorized' });
     const dispatch = useDispatch()
     const expenseForms = useSelector(state => state.expend);
@@ -20,7 +23,6 @@ function ValidationExpense(props) {
         const key = e.target.name;
         const value = e.target.value;
         setFormData({...formData, [key]: value})
-        setExpenses(expenseForms.find(epxense => epxense.user === formData.user && epxense.text === formData.text))
     }
     const onOptionChangeHandler = (e) => { 
         setFormData({...formData, user: e.target.value})
@@ -54,18 +56,20 @@ function ValidationExpense(props) {
                         </Form.Select>
                     </Form.Group>
                     <Button className="float-right" variant="primary" onClick={() => {
-                        handleClose();
-                        dispatch(addexpensing(formData))
-                        {console.log(expenseForms, formData)}
-
+                        const expenses = expenseForms.find(epxense => epxense.text === formData.text)
+                        if(expenses) {
+                            setShowalert(true);
+                        }
+                        else{
+                            handleClose();
+                            dispatch(addexpensing(formData))
+                        }
                     }}>Add</Button>
-                    {expenses && (
-                              <Alert variant="danger" dismissible>
-                                <Alert.Heading>You already added this description please change it!</Alert.Heading>
-                                <p>
-                                    Change description and add amount and that and try again.
-                                </p>
-                            </Alert>
+                    {showalert && (
+                        <Alert variant="danger" onClose={() => setShowalert(false)} dismissible>
+                            <Alert.Heading>You already added this description please change it!</Alert.Heading>
+                            <p>Change description and add amount and that and try again.</p>
+                        </Alert>
                     )}
                 </Form>
             </Modal>
