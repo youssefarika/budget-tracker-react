@@ -8,8 +8,14 @@ let currentState = localStorage.getItem("expense") ? JSON.parse(localStorage.get
     initialState: currentState,
     reducers: {
         addexpensing: (state, action) => {
-            state.push(action.payload)
-            localStorage.setItem("expense", JSON.stringify(state))
+            let expenses = state.find(epxense => epxense.user === action.payload.user && epxense.text === action.payload.text)
+            if(expenses) {
+              return 
+            }
+            else {
+              state.push(action.payload)
+              localStorage.setItem("expense", JSON.stringify(state))
+            }
             },
         removeexpensing: (state, action) => {
               state = state.filter(expense => expense.text !== action.payload.text)

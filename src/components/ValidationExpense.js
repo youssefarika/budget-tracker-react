@@ -3,17 +3,24 @@ import { Button, Modal } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { useDispatch, useSelector } from 'react-redux';
 import { addexpensing } from "../store/formeSlice"
+import Alert from 'react-bootstrap/Alert';
 
 function ValidationExpense(props) {
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    const [showalert, setShowalert] = useState(false);
+    const [expenses, setExpenses] = useState(null)
+    const handleClose = () => {
+        setShow(false);
+    }
     const handleShow = () => setShow(true);
     const [ formData, setFormData ] = useState({ text: '', amount: '', user: 'Uncategorized' });
     const dispatch = useDispatch()
+    const expenseForms = useSelector(state => state.expend);
     function handleChange(e) {
         const key = e.target.name;
         const value = e.target.value;
         setFormData({...formData, [key]: value})
+        setExpenses(expenseForms.find(epxense => epxense.user === formData.user && epxense.text === formData.text))
     }
     const onOptionChangeHandler = (e) => { 
         setFormData({...formData, user: e.target.value})
@@ -49,7 +56,17 @@ function ValidationExpense(props) {
                     <Button className="float-right" variant="primary" onClick={() => {
                         handleClose();
                         dispatch(addexpensing(formData))
+                        {console.log(expenseForms, formData)}
+
                     }}>Add</Button>
+                    {expenses && (
+                              <Alert variant="danger" dismissible>
+                                <Alert.Heading>You already added this description please change it!</Alert.Heading>
+                                <p>
+                                    Change description and add amount and that and try again.
+                                </p>
+                            </Alert>
+                    )}
                 </Form>
             </Modal>
         </>
