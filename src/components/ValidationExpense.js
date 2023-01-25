@@ -56,7 +56,7 @@ function ValidationExpense(props) {
                         </Form.Select>
                     </Form.Group>
                     <Button className="float-right" variant="primary" onClick={() => {
-                        const expenses = expenseForms.find(epxense => epxense.text === formData.text)
+                        const expenses = expenseForms.find(epxense => epxense.user === formData.user && epxense.text === formData.text)
                         if(expenses) {
                             setShowalert(true);
                         }
